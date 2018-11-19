@@ -2,7 +2,7 @@
   <div>
     <md-datepicker v-model="selectedDate" />
     <md-field>
-      <label for="movie">First day of a week</label>
+      <label>First day of a week</label>
       <md-select v-model="firstDayOfAWeek">
         <md-option value="0">Sunday</md-option>
         <md-option value="1">Monday</md-option>
@@ -10,12 +10,21 @@
       <span class="md-helper-text">This config is global.</span>
     </md-field>
     <md-field>
-      <label for="movie">Date format</label>
+      <label>Date format</label>
       <md-select v-model="dateFormat">
-        <md-option value="YYYY-MM-DD">default</md-option>
-        <md-option value="YYYY/MM/DD">YYYY/MM/DD</md-option>
-        <md-option value="DD/MM/YYYY">DD/MM/YYYY</md-option>
-        <md-option value="MM/DD/YYYY">MM/DD/YYYY</md-option>
+        <md-option value="yyyy-MM-dd">default</md-option>
+        <md-option value="yyyy/MM/dd">YYYY/MM/DD</md-option>
+        <md-option value="dd/MM/yyyy">DD/MM/YYYY</md-option>
+        <md-option value="MM/dd/yyyy">MM/DD/YYYY</md-option>
+        <md-option value="dd.MM.yyyy">DD.MM.YYYY</md-option>
+      </md-select>
+      <span class="md-helper-text">This config is global.</span>
+    </md-field>
+    <md-field>
+      <label>Date locale</label>
+      <md-select v-model="dateLocale">
+        <md-option value="en">default</md-option>
+        <md-option value="de">Deutsch</md-option>
       </md-select>
       <span class="md-helper-text">This config is global.</span>
     </md-field>
@@ -43,6 +52,14 @@
         },
         set (val) {
           this.$material.locale.dateFormat = val
+        }
+      },
+      dateLocale: {
+        get () {
+          return this.$material.dateLocale
+        },
+        set (val) {
+          return this.$material.dateLocale = val
         }
       }
     }

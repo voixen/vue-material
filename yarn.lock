@@ -2696,9 +2696,10 @@ datauri@^1.1.0:
     mimer "^0.3.2"
     semver "^5.5.0"
 
-date-fns@^2.0.0-alpha.7:
-  version "2.0.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.11.tgz#586e855107dc4717ba4d9f2c41cf12c3b72512c0"
+date-fns@^2.0.0-alpha.25:
+  version "2.0.0-alpha.25"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.25.tgz#651a5d1f59a01af6cf0371e39b2ae29df5d521ee"
+  integrity sha512-iQzJkHF0L4wah9Ae9PkvwemwFz6qmRLuNZcghmvf2t+ptLs1qXzONLiGtjmPQzL6+JpC01JjlTopY2AEy4NFAg==
 
 date-now@^0.1.4:
   version "0.1.4"

@@ -84,7 +84,7 @@
           : 'date'
       },
       dateFormat () {
-        return this.locale.dateFormat || 'YYYY-MM-DD'
+        return this.locale.dateFormat || 'yyyy-MM-dd'
       },
       modelType () {
         if (this.isModelTypeString) {
@@ -120,8 +120,8 @@
         return parsedDate && isValid(parsedDate) ? parsedDate : null
       },
       pattern () {
-        return this.dateFormat.replace(/YYYY|MM|DD/g, match => {
-          switch (match) {
+        return this.dateFormat.replace(/YYYY|MM|DD/gi, match => {
+          switch (match.toUpperCase()) {
           case 'YYYY':
             return '[0-9]{4}'
           case 'MM':

@@ -9,7 +9,7 @@ const init = () => {
     locale: {
       startYear: 1900,
       endYear: 2099,
-      dateFormat: 'YYYY-MM-DD',
+      dateFormat: 'yyyy-MM-dd',
       days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       shorterDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
@@ -18,6 +18,7 @@ const init = () => {
       shorterMonths: ['J', 'F', 'M', 'A', 'M', 'Ju', 'Ju', 'A', 'Se', 'O', 'N', 'D'],
       firstDayOfAWeek: 0
     },
+    dateLocale: 'en',
     router: {
       linkActiveClass: 'router-link-active'
     }

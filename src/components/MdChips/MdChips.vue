@@ -1,32 +1,50 @@
 <template>
-  <md-field class="md-chips" :class="[$mdActiveTheme, chipsClasses]">
-    <slot />
+  <div>
+    <md-field class="md-chips" :class="[$mdActiveTheme, chipsClasses]">
+      <slot />
 
-    <md-chip
-      v-for="(chip, key) in value"
-      :key="chip"
-      :md-deletable="!mdStatic"
-      :md-clickable="!mdStatic"
-      :md-duplicated="duplicatedChip === chip"
-      @keydown.enter="$emit('md-click', chip, key)"
-      @click.native="$emit('md-click', chip, key)"
-      @md-delete.stop="removeChip(chip)">
-      <slot name="md-chip" :chip="chip" v-if="$scopedSlots['md-chip']">{{ chip }}</slot>
-      <template v-else>{{ chip }}</template>
-    </md-chip>
+      <md-chip
+        v-if="!mdVertical"
+        v-for="(chip, key) in value"
+        :key="chip"
+        :md-deletable="!mdStatic"
+        :md-clickable="!mdStatic"
+        :md-duplicated="duplicatedChip === chip"
+        @keydown.enter="$emit('md-click', chip, key)"
+        @click.native="$emit('md-click', chip, key)"
+        @md-delete.stop="removeChip(chip)">
+        <slot name="md-chip" :chip="chip" v-if="$scopedSlots['md-chip']">{{ chip }}</slot>
+        <template v-else>{{ chip }}</template>
+      </md-chip>
 
-    <md-input
-      ref="input"
-      v-model.trim="inputValue"
-      v-if="!mdStatic && modelRespectLimit"
-      :type="mdInputType"
-      :id="id"
-      :placeholder="mdPlaceholder"
-      @input="handleInput"
-      @keydown.enter="insertChip"
-      @keydown.8="handleBackRemove">
-    </md-input>
-  </md-field>
+      <md-input
+        ref="input"
+        v-model.trim="inputValue"
+        v-if="!mdStatic && modelRespectLimit"
+        :type="mdInputType"
+        :id="id"
+        :placeholder="mdPlaceholder"
+        @input="handleInput"
+        @keydown.enter="insertChip"
+        @keydown.8="handleBackRemove">
+      </md-input>
+    </md-field>
+
+    <div v-if="mdVertical" class="md-chips md-chips-vertical" :class="[$mdActiveTheme]">
+      <md-chip
+        v-for="(chip, key) in value"
+        :key="chip"
+        :md-deletable="!mdStatic"
+        :md-clickable="!mdStatic"
+        :md-duplicated="duplicatedChip === chip"
+        @keydown.enter="$emit('md-click', chip, key)"
+        @click.native="$emit('md-click', chip, key)"
+        @md-delete.stop="removeChip(chip)">
+        <slot name="md-chip" :chip="chip" v-if="$scopedSlots['md-chip']">{{ chip }}</slot>
+        <template v-else>{{ chip }}</template>
+      </md-chip>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -61,6 +79,10 @@
       },
       mdFormat: {
         type: Function
+      },
+      mdVertical: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
@@ -70,7 +92,8 @@
     computed: {
       chipsClasses () {
         return {
-          'md-has-value': this.value && this.value.length
+          'md-has-value': this.value && this.value.length,
+          'md-vertical': this.mdVertical
         }
       },
 
@@ -171,6 +194,14 @@
 
     .md-input {
       min-width: 128px;
+    }
+  }
+
+  .md-chips.md-chips-vertical {
+    .md-chip {
+      margin-bottom: 6px;
+      margin-left: 0;
+      margin-right: 4px;
     }
   }
 </style>

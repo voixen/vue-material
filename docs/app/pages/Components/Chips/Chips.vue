@@ -1,6 +1,7 @@
 <example src="./examples/SingleChip.vue" />
 <example src="./examples/Static.vue" />
 <example src="./examples/Editable.vue" />
+<example src="./examples/EditableVertical.vue" />
 <example src="./examples/ChipCustomTemplate.vue" />
 <example src="./examples/DuplicatedFeedback.vue" />
 <example src="./examples/Format.vue" />
@@ -31,6 +32,13 @@
 
       <p>Sometimes we need to edit the set of items on screen, for example, when editing tags, the user may need to remove/add tags. In this case you can use the editable chips, that is the default behaviour:</p>
       <code-example title="Editable" :component="examples['editable']" />
+    </div>
+
+    <div class="page-container-section">
+      <h2>Editable model (vertical)</h2>
+
+      <p>Sometimes we need to edit the set of items on screen, for example, when editing tags, the user may need to remove/add tags. In this case you can use the editable chips, that is the default behaviour:</p>
+      <code-example title="Editable Vertical" :component="examples['editable-vertical']" />
     </div>
 
     <div class="page-container-section">
