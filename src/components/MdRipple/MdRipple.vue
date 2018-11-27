@@ -6,6 +6,7 @@
     @mousedown.passive="event => mdEventTrigger && startRipple(event)">
     <slot />
     <md-wave v-for="ripple in ripples" :key="ripple.uuid" :class="['md-ripple-wave', waveClasses]" :style="ripple.waveStyles" @md-end="clearWave(ripple.uuid)" v-if="!isDisabled" />
+    <span class="md-ripple--focused md-centered" v-if="isFocused && !isDisabled"></span>
   </div>
 </template>
 
@@ -27,7 +28,8 @@
       mdEventTrigger: {
         type: Boolean,
         default: true
-      }
+      },
+      mdFocused: Boolean
     },
     data: () => ({
       ripples: [],
@@ -37,6 +39,9 @@
     computed: {
       isDisabled () {
         return !this.$material.ripple || this.mdDisabled
+      },
+      isFocused () {
+        return this.mdFocused
       },
       rippleClasses () {
         return {
@@ -169,6 +174,25 @@
     ~ *:not(.md-ripple-wave) {
       position: relative;
       z-index: 2;
+    }
+  }
+
+  .md-ripple--focused {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    margin-top: -24px;
+    margin-left: -24px;
+    z-index: 1;
+    pointer-events: none;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0.2;
+    transform: scale(1) translateZ(0);
+
+    &.md-centered {
+      top: 50%;
+      left: 50%;
     }
   }
 </style>

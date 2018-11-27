@@ -47,8 +47,6 @@
 </template>
 
 <script>
-  import raf from 'raf'
-  import MdComponent from 'core/MdComponent'
   import MdDropDownIcon from 'core/icons/MdDropDownIcon'
   import MdMenu from 'components/MdMenu/MdMenu'
   import MdMenuContent from 'components/MdMenu/MdMenuContent'
@@ -283,9 +281,9 @@
         let isArray = Array.isArray(this.localValue)
 
         if (this.multiple && !isArray) {
-          this.localValue = this.setLocalValueIfMultiple()
+          this.setLocalValueIfMultiple()
         } else if (!this.multiple && isArray) {
-          this.localValue = this.setLocalValueIfNotMultiple()
+          this.setLocalValueIfNotMultiple()
         }
       },
       emitSelected (value) {

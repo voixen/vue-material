@@ -76,3 +76,9 @@
     })
   }
 </script>
+
+<style lang="scss">
+  .demo-content {
+    padding: 0 24px;
+  }
+</style>

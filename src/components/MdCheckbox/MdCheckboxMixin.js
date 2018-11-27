@@ -25,7 +25,8 @@ export default {
     event: 'change'
   },
   data: () => ({
-    rippleActive: false
+    rippleActive: false,
+    isFocused: false
   }),
   computed: {
     attrs () {
@@ -65,7 +66,8 @@ export default {
         'md-checked': this.isSelected,
         'md-disabled': this.disabled,
         'md-required': this.required,
-        'md-indeterminate': this.indeterminate
+        'md-indeterminate': this.indeterminate,
+        'md-focused': this.isFocused
       }
     },
     hasValue () {
@@ -109,6 +111,12 @@ export default {
           this.handleSimpleCheckbox()
         }
       }
+    },
+    onFocus() {
+      this.isFocused = true
+    },
+    onBlur() {
+      this.isFocused = false
     }
   }
 }

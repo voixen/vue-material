@@ -9,10 +9,16 @@
 </template>
 
 <script>
+  import MdMenuItem from 'components/MdMenu/MdMenuItem'
+  import MdCheckbox from 'components/MdCheckbox/MdCheckbox'
   import MdUuid from 'core/utils/MdUuid'
 
   export default {
     name: 'MdOption',
+    components: {
+      MdMenuItem,
+      MdCheckbox
+    },
     props: {
       value: [String, Number, Boolean],
       disabled: Boolean

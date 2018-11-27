@@ -1,8 +1,8 @@
 <template>
   <div class="md-checkbox" :class="[$mdActiveTheme, checkClasses]">
     <div class="md-checkbox-container" @click.stop="toggleCheck">
-      <md-ripple md-centered :md-active.sync="rippleActive" :md-disabled="disabled">
-        <input :id="id" type="checkbox" v-bind="attrs" :indeterminate.prop="indeterminate">
+      <md-ripple md-centered :md-active.sync="rippleActive" :md-disabled="disabled" :md-focused.sync="isFocused">
+        <input :id="id" type="checkbox" v-bind="attrs" :indeterminate.prop="indeterminate" @focus="onFocus" @blur="onBlur">
       </md-ripple>
     </div>
 
