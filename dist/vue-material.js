@@ -1379,7 +1379,8 @@ exports.default = {
     readonly: Boolean,
     required: Boolean,
     disabled: Boolean,
-    mdCounter: [String, Number]
+    mdCounter: [String, Number],
+    autofocus: Boolean
   },
   data: function data() {
     return {
@@ -1415,7 +1416,8 @@ exports.default = {
         required: this.required,
         placeholder: this.placeholder,
         readonly: this.readonly,
-        maxlength: this.maxlength
+        maxlength: this.maxlength,
+        autofocus: this.autofocus
       });
     }
   },
@@ -1488,6 +1490,9 @@ exports.default = {
         this.MdField.maxlength = parseInt(this.maxlength, 10);
       }
     },
+    setAutofocus: function setAutofocus() {
+      this.MdField.autofocus = Boolean(this.autofocus);
+    },
     onFocus: function onFocus() {
       this.MdField.focused = true;
     },
@@ -1501,6 +1506,7 @@ exports.default = {
     this.setDisabled();
     this.setRequired();
     this.setMaxlength();
+    this.setAutofocus();
   },
   mounted: function mounted() {
     this.setLabelFor();
@@ -5485,6 +5491,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 var _MdComponent = __webpack_require__(1);
 
@@ -5536,6 +5543,10 @@ exports.default = new _MdComponent2.default({
       type: Function
     },
     mdVertical: {
+      type: Boolean,
+      default: false
+    },
+    mdAutofocus: {
       type: Boolean,
       default: false
     }
@@ -19566,7 +19577,8 @@ var render = function() {
                 attrs: {
                   type: _vm.mdInputType,
                   id: _vm.id,
-                  placeholder: _vm.mdPlaceholder
+                  placeholder: _vm.mdPlaceholder,
+                  autofocus: _vm.mdAutofocus
                 },
                 on: {
                   input: _vm.handleInput,
