@@ -9,7 +9,7 @@
         :key="chip"
         :md-deletable="!mdStatic"
         :md-clickable="!mdStatic"
-        :md-duplicated="duplicatedChip === chip"
+        :md-duplicated="isDuplicatedChip(chip)"
         @keydown.enter="$emit('md-click', chip, key)"
         @click.native="$emit('md-click', chip, key)"
         @md-delete.stop="removeChip(chip)">
@@ -37,7 +37,7 @@
         :key="chip"
         :md-deletable="!mdStatic"
         :md-clickable="!mdStatic"
-        :md-duplicated="duplicatedChip === chip"
+        :md-duplicated="isDuplicatedChip(chip)"
         @keydown.enter="$emit('md-click', chip, key)"
         @click.native="$emit('md-click', chip, key)"
         @md-delete.stop="removeChip(chip)">
@@ -88,11 +88,15 @@
       mdAutofocus: {
         type: Boolean,
         default: false
+      },
+      mdSplitter: {
+        type: String,
+        default: ','
       }
     },
     data: () => ({
       inputValue: '',
-      duplicatedChip: null
+      duplicatedChip: []
     }),
     computed: {
       chipsClasses () {
@@ -115,32 +119,33 @@
     },
     methods: {
       insertChip ({ target }) {
-        let inputValue = this.formattedInputValue
-
+        const inputValue = this.formattedInputValue
         if (!inputValue || !this.modelRespectLimit) {
           return
         }
 
+        const newValues = this.mdSplitter ? inputValue.split(this.mdSplitter) : [inputValue]
+        newValues.forEach(v => {
+          this.addChip(v.trim())
+        })
+
+        this.$emit('input', this.value)
+        this.inputValue = ''
+      },
+      addChip(inputValue) {
         if (this.value.includes(inputValue)) {
-          this.duplicatedChip = null
-          // to trigger animate
-          this.$nextTick(() => {
-            this.duplicatedChip = inputValue
-          })
           return
         }
 
         this.value.push(inputValue)
-        this.$emit('input', this.value)
         this.$emit('md-insert', inputValue)
-        this.inputValue = ''
       },
       removeChip (chip) {
         const index = this.value.indexOf(chip)
 
         this.value.splice(index, 1)
-        this.$emit('input', this.value)
         this.$emit('md-delete', chip, index)
+        this.$emit('input', this.value)
         this.$nextTick(() => this.$refs.input.$el.focus())
       },
       handleBackRemove () {
@@ -151,21 +156,35 @@
       handleInput () {
         if (this.mdCheckDuplicated) {
           this.checkDuplicated()
-        } else {
-          this.duplicatedChip = null
+        }
+        else {
+          this.duplicatedChip = []
         }
       },
       checkDuplicated () {
-        if (!this.value.includes(this.formattedInputValue)) {
-          this.duplicatedChip = null
-          return false
-        }
-
+        this.duplicatedChip = []
         if (!this.mdCheckDuplicated) {
           return false
         }
 
-        this.duplicatedChip = this.formattedInputValue
+        const inputValue = this.formattedInputValue
+        const splitIdx = this.mdSplitter ? inputValue.indexOf(this.mdSplitter) : -1
+        const values = splitIdx !== -1 ? inputValue.split(this.mdSplitter) : [inputValue]
+
+        values.forEach(v => {
+          this.checkDuplicate(v.trim())
+        })
+      },
+      checkDuplicate (value) {
+        const idx = this.value.indexOf(value)
+        const dupIdx = this.duplicatedChip.includes(value)
+
+        if (idx !== -1 && !dupIdx) {
+          this.duplicatedChip.push(value)
+        }
+      },
+      isDuplicatedChip (value) {
+        return this.duplicatedChip.includes(value)
       }
     },
     watch: {

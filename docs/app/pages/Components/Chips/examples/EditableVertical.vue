@@ -1,6 +1,13 @@
 <template>
   <div class="example-editable-vertical">
-    <md-chips v-model="fruits" md-placeholder="Add fruit..." md-vertical></md-chips>
+    <md-chips v-model="fruits" md-placeholder="Add fruit..." md-vertical md-check-duplicated
+      @md-insert="onInsert"
+      @md-delete="onDelete"
+      @input="onInput"
+    ></md-chips>
+    <div v-for="event in events">
+      <div>{{ event.type }} : {{ event.data }}</div>
+    </div>
   </div>
 </template>
 
@@ -12,8 +19,29 @@
         'Orange',
         'Apple',
         'Pineapple'
-      ]
-    })
+      ],
+      events: []
+    }),
+    methods: {
+      onInsert: function(data) {
+        this.events.push({
+          type: 'inserted',
+          data
+        })
+      },
+      onDelete: function(data, index) {
+        this.events.push({
+          type: 'deleted',
+          data
+        })
+      },
+      onInput: function(data) {
+        this.events.push({
+          type: 'values',
+          data: data.slice()
+        })
+      }
+    }
   }
 </script>
 

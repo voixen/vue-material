@@ -37,7 +37,11 @@
     <div class="page-container-section">
       <h2>Editable model (vertical)</h2>
 
-      <p>Sometimes we need to edit the set of items on screen, for example, when editing tags, the user may need to remove/add tags. In this case you can use the editable chips, that is the default behaviour:</p>
+      <p>
+        To place the existing chips under the input field use <code>md-vertical</code>.
+        This example also show the event types and data.
+        <code>md-check-duplicated</code> is active.
+      </p>
       <code-example title="Editable Vertical" :component="examples['editable-vertical']" />
     </div>
 
@@ -193,6 +197,12 @@ export default {
             type: 'Boolean',
             description: 'Set autofocus to input.',
             defaults: 'false'
+          },
+          {
+            name: 'md-splitter',
+            type: 'String',
+            description: 'Split input value by ex. space or comma.',
+            defaults: ','
           }
         ]
       },
