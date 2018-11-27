@@ -5549,12 +5549,16 @@ exports.default = new _MdComponent2.default({
     mdAutofocus: {
       type: Boolean,
       default: false
+    },
+    mdSplitter: {
+      type: String,
+      default: ','
     }
   },
   data: function data() {
     return {
       inputValue: '',
-      duplicatedChip: null
+      duplicatedChip: []
     };
   },
   computed: {
@@ -5581,24 +5585,25 @@ exports.default = new _MdComponent2.default({
       var target = _ref.target;
 
       var inputValue = this.formattedInputValue;
-
       if (!inputValue || !this.modelRespectLimit) {
         return;
       }
 
+      var newValues = this.mdSplitter ? inputValue.split(this.mdSplitter) : [inputValue];
+      newValues.forEach(function (v) {
+        _this.addChip(v.trim());
+      });
+
+      this.$emit('input', this.value);
+      this.inputValue = '';
+    },
+    addChip: function addChip(inputValue) {
       if (this.value.includes(inputValue)) {
-        this.duplicatedChip = null;
-        // to trigger animate
-        this.$nextTick(function () {
-          _this.duplicatedChip = inputValue;
-        });
         return;
       }
 
       this.value.push(inputValue);
-      this.$emit('input', this.value);
       this.$emit('md-insert', inputValue);
-      this.inputValue = '';
     },
     removeChip: function removeChip(chip) {
       var _this2 = this;
@@ -5606,8 +5611,8 @@ exports.default = new _MdComponent2.default({
       var index = this.value.indexOf(chip);
 
       this.value.splice(index, 1);
-      this.$emit('input', this.value);
       this.$emit('md-delete', chip, index);
+      this.$emit('input', this.value);
       this.$nextTick(function () {
         return _this2.$refs.input.$el.focus();
       });
@@ -5621,20 +5626,35 @@ exports.default = new _MdComponent2.default({
       if (this.mdCheckDuplicated) {
         this.checkDuplicated();
       } else {
-        this.duplicatedChip = null;
+        this.duplicatedChip = [];
       }
     },
     checkDuplicated: function checkDuplicated() {
-      if (!this.value.includes(this.formattedInputValue)) {
-        this.duplicatedChip = null;
-        return false;
-      }
+      var _this3 = this;
 
+      this.duplicatedChip = [];
       if (!this.mdCheckDuplicated) {
         return false;
       }
 
-      this.duplicatedChip = this.formattedInputValue;
+      var inputValue = this.formattedInputValue;
+      var splitIdx = this.mdSplitter ? inputValue.indexOf(this.mdSplitter) : -1;
+      var values = splitIdx !== -1 ? inputValue.split(this.mdSplitter) : [inputValue];
+
+      values.forEach(function (v) {
+        _this3.checkDuplicate(v.trim());
+      });
+    },
+    checkDuplicate: function checkDuplicate(value) {
+      var idx = this.value.indexOf(value);
+      var dupIdx = this.duplicatedChip.includes(value);
+
+      if (idx !== -1 && !dupIdx) {
+        this.duplicatedChip.push(value);
+      }
+    },
+    isDuplicatedChip: function isDuplicatedChip(value) {
+      return this.duplicatedChip.includes(value);
     }
   },
   watch: {
@@ -19530,7 +19550,7 @@ var render = function() {
                     attrs: {
                       "md-deletable": !_vm.mdStatic,
                       "md-clickable": !_vm.mdStatic,
-                      "md-duplicated": _vm.duplicatedChip === chip
+                      "md-duplicated": _vm.isDuplicatedChip(chip)
                     },
                     on: {
                       keydown: function($event) {
@@ -19628,7 +19648,7 @@ var render = function() {
                   attrs: {
                     "md-deletable": !_vm.mdStatic,
                     "md-clickable": !_vm.mdStatic,
-                    "md-duplicated": _vm.duplicatedChip === chip
+                    "md-duplicated": _vm.isDuplicatedChip(chip)
                   },
                   on: {
                     keydown: function($event) {
