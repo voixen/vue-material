@@ -24,6 +24,7 @@
         :type="mdInputType"
         :id="id"
         :placeholder="mdPlaceholder"
+        :autofocus="mdAutofocus"
         @input="handleInput"
         @keydown.enter="insertChip"
         @keydown.8="handleBackRemove">
@@ -81,6 +82,10 @@
         type: Function
       },
       mdVertical: {
+        type: Boolean,
+        default: false
+      },
+      mdAutofocus: {
         type: Boolean,
         default: false
       }

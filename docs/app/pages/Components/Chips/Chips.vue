@@ -181,6 +181,18 @@ export default {
               'The Chips will pass the inputted value as a parameter of this function. This function returns the formatted result.'
             ].join('<br/>'),
             defaults: 'null'
+          },
+          {
+            name: 'md-vertical',
+            type: 'Boolean',
+            description: 'Place chips in edit mode under the input.',
+            defaults: 'false'
+          },
+          {
+            name: 'md-autofocus',
+            type: 'Boolean',
+            description: 'Set autofocus to input.',
+            defaults: 'false'
           }
         ]
       },

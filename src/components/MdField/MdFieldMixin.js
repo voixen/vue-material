@@ -7,7 +7,8 @@ export default {
     readonly: Boolean,
     required: Boolean,
     disabled: Boolean,
-    mdCounter: [String, Number]
+    mdCounter: [String, Number],
+    autofocus: Boolean
   },
   data () {
     return {
@@ -41,7 +42,8 @@ export default {
         required: this.required,
         placeholder: this.placeholder,
         readonly: this.readonly,
-        maxlength: this.maxlength
+        maxlength: this.maxlength,
+        autofocus: this.autofocus
       }
     }
   },
@@ -114,6 +116,9 @@ export default {
         this.MdField.maxlength = parseInt(this.maxlength, 10)
       }
     },
+    setAutofocus () {
+      this.MdField.autofocus = Boolean(this.autofocus)
+    },
     onFocus () {
       this.MdField.focused = true
     },
@@ -127,6 +132,7 @@ export default {
     this.setDisabled()
     this.setRequired()
     this.setMaxlength()
+    this.setAutofocus()
   },
   mounted () {
     this.setLabelFor()
