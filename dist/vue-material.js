@@ -9213,6 +9213,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 var _MdDropDownIcon = __webpack_require__(366);
 
@@ -28658,6 +28659,7 @@ var render = function() {
       class: { "md-disabled": _vm.disabled },
       attrs: {
         "md-close-on-select": false,
+        "md-close-on-click": true,
         "md-active": _vm.showSelect,
         "md-offset-x": _vm.offset.x,
         "md-offset-y": _vm.offset.y,
