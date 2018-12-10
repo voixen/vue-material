@@ -3,6 +3,7 @@
     class="md-select"
     :class="{ 'md-disabled': disabled }"
     :md-close-on-select="false"
+    :md-close-on-click="true"
     :md-active.sync="showSelect"
     :md-offset-x="offset.x"
     :md-offset-y="offset.y"
