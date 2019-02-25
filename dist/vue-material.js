@@ -1,6 +1,6 @@
 /*!
- * vue-material v1.0.0-beta-10.2
- * Made with <3 by marcosmoura 2018
+ * vue-material v1.0.1
+ * Made with <3 by marcosmoura 2019
  * Released under the MIT License.
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -5982,6 +5982,7 @@ exports.default = {
   },
   methods: {
     isSVG: function isSVG(mimetype) {
+      if (typeof mimetype !== 'string') return false;
       return mimetype.indexOf('svg') >= 0;
     },
     setHtml: function setHtml(value) {
@@ -6618,6 +6619,10 @@ exports.default = {
       if (this.mdOpenOnFocus) {
         this.toggleDialog();
       }
+    },
+    onLeave: function onLeave() {
+      this.showDialog = false;
+      this.$emit('md-closed');
     },
     inputDateToLocalDate: function inputDateToLocalDate() {
       if (this.inputDate) {
@@ -27017,6 +27022,17 @@ var render = function() {
       _c("md-input", {
         ref: "input",
         attrs: { type: _vm.type, pattern: _vm.pattern },
+        on: {
+          keydown: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "tab", 9, $event.key, "Tab")
+            ) {
+              return null
+            }
+            return _vm.onLeave($event)
+          }
+        },
         nativeOn: {
           focus: function($event) {
             return _vm.onFocus($event)
