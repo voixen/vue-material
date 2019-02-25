@@ -1,7 +1,7 @@
 <template>
   <md-field :class="['md-datepicker', { 'md-native': !this.mdOverrideNative }]" md-clearable>
     <md-date-icon class="md-date-icon" @click.native="toggleDialog" />
-    <md-input :type="type" ref="input" v-model="inputDate" @focus.native="onFocus" :pattern="pattern" />
+    <md-input :type="type" ref="input" v-model="inputDate" @focus.native="onFocus" @keydown.tab="onLeave" :pattern="pattern" />
 
     <slot />
 
@@ -193,6 +193,10 @@
         if (this.mdOpenOnFocus) {
           this.toggleDialog()
         }
+      },
+      onLeave () {
+        this.showDialog = false
+        this.$emit('md-closed')
       },
       inputDateToLocalDate () {
         if (this.inputDate) {
