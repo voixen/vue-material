@@ -39,9 +39,7 @@
 </template>
 
 <script>
-  import parse from 'date-fns/parse'
-  import format from 'date-fns/format'
-  import isValid from 'date-fns/isValid'
+  import {format, parse, isValid} from 'date-fns'
 
   export default {
     name: 'MultiTypesDatepicker',

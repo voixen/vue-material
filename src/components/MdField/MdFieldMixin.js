@@ -22,7 +22,9 @@ export default {
         return this.localValue
       },
       set (value) {
-        if (value.constructor.toString().match(/function (\w*)/)[1].toLowerCase() !== 'inputevent') {
+        const constr = value.constructor.toString()
+        const fromFunction = constr.match(/function (\w*)/) || constr.match(/\[object (\w*)/)
+        if (!fromFunction || fromFunction[1].toLowerCase() !== 'inputevent') {
           this.$nextTick(() => {
             this.localValue = value
           })

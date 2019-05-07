@@ -246,6 +246,7 @@
       height: 20px;
       position: absolute;
       bottom: -22px;
+      left: 0;
       font-size: 12px;
       transition: .3s $md-transition-default-timing;
     }
@@ -469,7 +470,7 @@
       }
     }
 
-    &.md-clearable {
+    &.md-clearable.md-has-value {
       .md-input {
         padding-right: 30px;
       }

@@ -89,20 +89,21 @@
 </template>
 
 <script>
-  import addMonths from 'date-fns/addMonths'
-  import startOfMonth from 'date-fns/startOfMonth'
-  import subMonths from 'date-fns/subMonths'
-  import getDate from 'date-fns/getDate'
-  import getDay from 'date-fns/getDay'
-  import getDaysInMonth from 'date-fns/getDaysInMonth'
-  import getMonth from 'date-fns/getMonth'
-  import getYear from 'date-fns/getYear'
-  import isEqual from 'date-fns/isEqual'
-  import isSameDay from 'date-fns/isSameDay'
-  import setDate from 'date-fns/setDate'
-  import setMonth from 'date-fns/setMonth'
-  import setYear from 'date-fns/setYear'
-
+  import {
+    addMonths,
+    startOfMonth,
+    subMonths,
+    getDate,
+    getDay,
+    getDaysInMonth,
+    getMonth,
+    getYear,
+    isEqual,
+    isSameDay,
+    setDate,
+    setMonth,
+    setYear
+  } from 'date-fns'
   import MdComponent from 'core/MdComponent'
   import MdPopover from 'components/MdPopover/MdPopover'
   import MdArrowRightIcon from 'core/icons/MdArrowRightIcon'
@@ -365,6 +366,7 @@
     border-radius: 2px;
     backface-visibility: hidden;
     pointer-events: auto;
+    flex-shrink: 0;
     transform-origin: top left;
     transition: opacity .2s $md-transition-stand-timing,
                 transform .35s $md-transition-stand-timing;

@@ -22,9 +22,7 @@
 <script>
   import Vue from 'vue'
   import isFirefox from 'is-firefox'
-  import format from 'date-fns/format'
-  import parse from 'date-fns/parse'
-  import isValid from 'date-fns/isValid'
+  import {format, parse, isValid} from 'date-fns'
   import MdPropValidator from 'core/utils/MdPropValidator'
   import MdOverlay from 'components/MdOverlay/MdOverlay'
   import MdDatepickerDialog from './MdDatepickerDialog'
@@ -84,7 +82,7 @@
           : 'date'
       },
       dateFormat () {
-        return this.locale.dateFormat || 'yyyy-MM-dd'
+        return this.locale.dateFormat || 'YYYY-MM-DD'
       },
       modelType () {
         if (this.isModelTypeString) {
@@ -172,7 +170,7 @@
       },
       dateFormat () {
         if (this.localDate) {
-          this.inputDate = format(this.inputDate, this.dateFormat)
+          this.inputDate = format(this.localDate, this.dateFormat)
         }
       }
     },

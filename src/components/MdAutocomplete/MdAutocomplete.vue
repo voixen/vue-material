@@ -192,7 +192,9 @@
           this.showOptions()
         }
 
-        if (this.searchTerm.constructor.toString().match(/function (\w*)/)[1].toLowerCase() !== 'inputevent') {
+        const constr = this.searchTerm.constructor.toString()
+        const fromFunction = constr.match(/function (\w*)/) || constr.match(/\[object (\w*)/)
+        if (!fromFunction || fromFunction[1].toLowerCase() !== 'inputevent') {
           this.$emit('md-changed', this.searchTerm)
         }
       },

@@ -8,14 +8,14 @@
         import Vue from 'vue'
 
         // change single option
-        Vue.material.locale.dateFormat = 'DD/MM/YYYY'
+        Vue.material.locale.dateFormat = 'dd/MM/yyyy'
 
         // change multiple options
         Vue.material = {
           ...Vue.material,
           locale: {
             ...Vue.material.locale,
-            dateFormat: 'DD/MM/YYYY',
+            dateFormat: 'dd/MM/yyyy',
             firstDayOfAWeek: 1
           }
         }

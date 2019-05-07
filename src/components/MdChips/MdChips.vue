@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--TODO we must reflect all $attrs from div to md-field-->
     <md-field class="md-chips" :class="[$mdActiveTheme, chipsClasses]">
       <slot />
 
@@ -90,7 +91,7 @@
         default: false
       },
       mdSplitter: {
-        type: String,
+        type: String|Array,
         default: ','
       }
     },
@@ -99,18 +100,18 @@
       duplicatedChip: []
     }),
     computed: {
-      chipsClasses () {
+      chipsClasses() {
         return {
           'md-has-value': this.value && this.value.length,
           'md-vertical': this.mdVertical
         }
       },
 
-      modelRespectLimit () {
+      modelRespectLimit() {
         return !this.mdLimit || this.value.length < this.mdLimit
       },
 
-      formattedInputValue () {
+      formattedInputValue() {
         if (!this.mdFormat) {
           return this.inputValue
         }
@@ -118,13 +119,21 @@
       }
     },
     methods: {
-      insertChip ({ target }) {
+      insertChip({ target }) {
         const inputValue = this.formattedInputValue
         if (!inputValue || !this.modelRespectLimit) {
           return
         }
 
-        const newValues = this.mdSplitter ? inputValue.split(this.mdSplitter) : [inputValue]
+        let newValues
+        if (!this.mdSplitter) newValues = [inputValue]
+        else if (typeof this.mdSplitter === 'string') newValues = inputValue.split(this.mdSplitter)
+        else if (Array.isArray(this.mdSplitter)) {
+          this.mdSplitter.forEach(splitter => {
+            newValues = newValues.concat(inputValue.split(splitter))
+          })
+        }
+
         newValues.forEach(v => {
           this.addChip(v.trim())
         })
@@ -140,7 +149,7 @@
         this.value.push(inputValue)
         this.$emit('md-insert', inputValue)
       },
-      removeChip (chip) {
+      removeChip(chip) {
         const index = this.value.indexOf(chip)
 
         this.value.splice(index, 1)
@@ -148,12 +157,12 @@
         this.$emit('input', this.value)
         this.$nextTick(() => this.$refs.input.$el.focus())
       },
-      handleBackRemove () {
+      handleBackRemove() {
         if (!this.inputValue) {
           this.removeChip(this.value[this.value.length - 1])
         }
       },
-      handleInput () {
+      handleInput() {
         if (this.mdCheckDuplicated) {
           this.checkDuplicated()
         }
@@ -161,7 +170,7 @@
           this.duplicatedChip = []
         }
       },
-      checkDuplicated () {
+      checkDuplicated() {
         this.duplicatedChip = []
         if (!this.mdCheckDuplicated) {
           return false
@@ -175,7 +184,7 @@
           this.checkDuplicate(v.trim())
         })
       },
-      checkDuplicate (value) {
+      checkDuplicate(value) {
         const idx = this.value.indexOf(value)
         const dupIdx = this.duplicatedChip.includes(value)
 
@@ -183,12 +192,12 @@
           this.duplicatedChip.push(value)
         }
       },
-      isDuplicatedChip (value) {
+      isDuplicatedChip(value) {
         return this.duplicatedChip.includes(value)
       }
     },
     watch: {
-      value () {
+      value() {
         this.checkDuplicated()
       }
     }

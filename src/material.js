@@ -9,7 +9,7 @@ const init = () => {
     locale: {
       startYear: 1900,
       endYear: 2099,
-      dateFormat: 'yyyy-MM-dd',
+      dateFormat: 'YYYY-MM-DD',
       days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
       shortDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       shorterDays: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
