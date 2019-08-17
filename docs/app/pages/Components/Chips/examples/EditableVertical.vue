@@ -1,6 +1,6 @@
 <template>
   <div class="example-editable-vertical">
-    <md-chips v-model="fruits" md-placeholder="Add fruit..." md-vertical md-check-duplicated
+    <md-chips v-model="fruits" md-placeholder="Add fruit..." md-vertical md-check-duplicated md-nobackspace
       @md-insert="onInsert"
       @md-delete="onDelete"
       @input="onInput"

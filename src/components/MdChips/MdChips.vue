@@ -93,6 +93,10 @@
       mdSplitter: {
         type: String|Array,
         default: ','
+      },
+      mdNobackspace: {
+        type: Boolean,
+        default: false
       }
     },
     data: () => ({
@@ -158,7 +162,7 @@
         this.$nextTick(() => this.$refs.input.$el.focus())
       },
       handleBackRemove() {
-        if (!this.inputValue) {
+        if (!this.mdNobackspace && !this.inputValue) {
           this.removeChip(this.value[this.value.length - 1])
         }
       },

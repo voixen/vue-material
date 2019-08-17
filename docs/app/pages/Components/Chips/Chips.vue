@@ -41,6 +41,7 @@
         To place the existing chips under the input field use <code>md-vertical</code>.
         This example also show the event types and data.
         <code>md-check-duplicated</code> is active.
+        <code>md-nobackspace</code> is active.
       </p>
       <code-example title="Editable Vertical" :component="examples['editable-vertical']" />
     </div>
@@ -203,6 +204,12 @@ export default {
             type: 'String',
             description: 'Split input value by ex. space or comma.',
             defaults: ','
+          },
+          {
+            name: 'md-nobackspace',
+            type: 'Boolean',
+            description: 'Prevent removing chips with backspace in an empty input.',
+            defaults: 'false'
           }
         ]
       },
