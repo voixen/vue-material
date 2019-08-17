@@ -1,5 +1,5 @@
 /*!
- * vue-material v1.0.2
+ * vue-material v1.0.3
  * Made with <3 by marcosmoura 2019
  * Released under the MIT License.
  */
@@ -5974,6 +5974,10 @@ exports.default = new _MdComponent2.default({
     mdSplitter: {
       type: String | Array,
       default: ','
+    },
+    mdNobackspace: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -6045,7 +6049,7 @@ exports.default = new _MdComponent2.default({
       });
     },
     handleBackRemove: function handleBackRemove() {
-      if (!this.inputValue) {
+      if (!this.mdNobackspace && !this.inputValue) {
         this.removeChip(this.value[this.value.length - 1]);
       }
     },
