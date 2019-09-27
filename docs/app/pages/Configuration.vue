@@ -51,7 +51,7 @@
             endYear: 2099,
 
             // date format for date picker
-            dateFormat: 'YYYY-MM-DD',
+            dateFormat: 'yyyy-MM-dd',
 
             // i18n strings
             days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

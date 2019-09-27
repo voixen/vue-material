@@ -82,7 +82,7 @@
           : 'date'
       },
       dateFormat () {
-        return this.locale.dateFormat || 'YYYY-MM-DD'
+        return this.locale.dateFormat || 'yyyy-MM-dd'
       },
       modelType () {
         if (this.isModelTypeString) {
