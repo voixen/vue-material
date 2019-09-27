@@ -44,7 +44,7 @@
   export default {
     name: 'MultiTypesDatepicker',
     data () {
-      let dateFormat = this.$material.locale.dateFormat || 'YYYY-MM-DD'
+      let dateFormat = this.$material.locale.dateFormat || 'yyyy-MM-dd'
       let now = new Date()
 
       return {
@@ -80,7 +80,7 @@
         }
       },
       dateFormat () {
-        return this.$material.locale.dateFormat || 'YYYY-MM-DD'
+        return this.$material.locale.dateFormat || 'yyyy-MM-dd'
       },
       mdType () {
         switch (this.mdTypeValue) {
